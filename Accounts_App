@@ -1,0 +1,232 @@
+import java.util.*;
+import java.io.*;
+import java.time.*;
+public class  vrund_java
+{
+   
+   static class SavingAccount  {
+     long money;
+     ArrayList<String> debit_transtions=new ArrayList<>();
+     ArrayList<String> credit_transtions=new ArrayList<>();
+ 
+     SavingAccount(long money) {
+      this.money=money;
+     } 
+     void Print_Money() {
+     	System.out.println("\nBank Balance is : "+money+"\n");
+     }
+     boolean added_money_is_valid(long temp) {
+     	if(temp%500==0){
+     		return true;
+     	}
+     	else {
+     		return false;
+     	}
+
+     }        
+     void add_money_debit(long add_money_debit) {
+     
+      if(!added_money_is_valid(add_money_debit)) {
+      	System.out.println("\nInvalid Number\n");
+      } 
+     else{
+     	money+=add_money_debit;
+       debit_transtions.add("Deposits : "+add_money_debit);
+      }
+    }
+      void Extract_money_credit(long exract_money_credit) {
+     
+      if(!added_money_is_valid(exract_money_credit)) {
+      	System.out.println("\nInvalid Number\n");
+      } 
+     else{
+     	money-=exract_money_credit;
+       credit_transtions.add("Withdraws : "+exract_money_credit);
+      }
+    }
+    void print_credit_transtions() {
+    	System.out.println("\n\n"+credit_transtions+"\n\n");
+    }
+
+    void print_debit_transtions() {
+    	System.out.println("\n\n"+debit_transtions+"\n\n");
+    }
+
+   } 
+   
+   static class CheckingAccount  {
+     long money;
+     ArrayList<String> debit_transtions=new ArrayList<>();
+     ArrayList<String> credit_transtions=new ArrayList<>();
+ 
+     CheckingAccount(long money) {
+      this.money=money;
+     } 
+
+     void Print_Money() {
+     	System.out.println("\nBank Balance is : "+money+"\n");
+     }
+     boolean added_money_is_valid(long temp) {
+     	if(temp%500==0){
+     		return true;
+     	}
+     	else {
+     		return false;
+     	}
+
+     }        
+     void add_money_debit(long add_money_debit_card) {
+     
+      if(!added_money_is_valid(add_money_debit_card)) {
+      	System.out.println("\nInvalid Number\n");
+      } 
+     else{
+     	money+=add_money_debit_card;
+       debit_transtions.add("Deposits : "+add_money_debit_card);
+      }
+    }
+      void Extract_money_credit(long exract_money_credit) {
+     
+      if(!added_money_is_valid(exract_money_credit)) {
+      	System.out.println("\nInvalid Number\n");
+      } 
+     else{
+     	money-=exract_money_credit;
+       credit_transtions.add("Withdraws : "+exract_money_credit);
+      }
+    }
+
+   
+    void print_credit_transtions() {
+    	System.out.println("\n\n"+credit_transtions+"\n\n");
+    }
+
+    void print_debit_transtions() {
+    	System.out.println("\n\n"+ debit_transtions+"\n\n");
+    }
+    
+
+   } 
+
+
+
+	public static void main(String[] args) throws IOException 
+	{
+		//BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		Scanner scan=new Scanner(System.in);
+
+		CheckingAccount checking_account=new CheckingAccount(10000);
+
+		SavingAccount saving_account =new SavingAccount(10000);
+
+		System.out.println("Plese enter the Number : \n1 : Saving Account \n2 : Checking Account");
+		int enteredNumber;
+		do {
+           enteredNumber=scan.nextInt();
+
+           if(!(enteredNumber==1||enteredNumber==2))
+           System.out.println("Plese enter the Corect Number : \n 1 : Saving Account \n2 : Checking Account");
+
+		}while(!(enteredNumber==1||enteredNumber==2));
+        boolean changeAccount=false;
+       do {
+
+        if(enteredNumber==1) {
+           //Saving Account 
+        	int transtion_id;
+        	boolean user_wants_extis=false;
+        	do {
+        		System.out.println("Plese enter the Number : \n 1 : Deposits  \n 2 : Withdraws \n 3 : Show Transtions for debit  \n 4: Show Transtions for credit  \n 5: Show Bank Balance \n 6 : Exit Number");
+                transtion_id=scan.nextInt();
+                if(transtion_id==1) {
+                	System.out.println("Please Enter the Amount ( Should be mulplie of 500 ) : ");
+                      long entered_money=scan.nextLong();
+                      saving_account.add_money_debit(entered_money);
+                }
+                else if(transtion_id==2) {
+                   System.out.println("Please Enter the Amount ( Should be mulplie of 500 ) : ");
+                      long entered_money=scan.nextLong();
+                      saving_account.Extract_money_credit(entered_money);
+                }
+               
+                else if(transtion_id==3){ 
+                  saving_account.print_debit_transtions();
+                }
+                else if(transtion_id==4) {
+                	saving_account.print_credit_transtions();
+
+                }
+                else if(transtion_id==5) {
+                   saving_account.Print_Money();
+                }
+                else if(transtion_id==6) {
+                	user_wants_extis=true;
+                }
+                else {
+                	System.out.println("Not Valid Number");
+                }
+
+
+        	}while(!user_wants_extis);
+        }
+        else {
+        	// Checking Account
+        	int transtion_id;
+        	boolean user_wants_extis=false;
+        	do {
+        		System.out.println("Plese enter the Number : \n 1 : Deposits  \n 2 : Withdraws \n 3 : Show Transtions for debit  \n 4: Show Transtions for credit  \n 5: Show Bank Balance \n 6 : Exit Number");
+                transtion_id=scan.nextInt();
+                if(transtion_id==1) {
+                	System.out.println("Please Enter the Amount ( Should be mulplie of 500 ) : ");
+                      long entered_money=scan.nextLong();
+                      checking_account.add_money_debit(entered_money);
+                }
+                else if(transtion_id==2) {
+                   System.out.println("Please Enter the Amount ( Should be mulplie of 500 ) : ");
+                      long entered_money=scan.nextLong();
+                      checking_account.Extract_money_credit(entered_money);
+                }
+                 else if(transtion_id==3){ 
+                  saving_account.print_debit_transtions();
+                }
+                else if(transtion_id==4) {
+                	saving_account.print_credit_transtions();
+
+                }
+                else if(transtion_id==5) {
+                   saving_account.Print_Money();
+                }
+                else if(transtion_id==6) {
+                	user_wants_extis=true;
+                }
+                else {
+                	System.out.println("Not Valid Number");
+                }
+
+
+        	}while(!user_wants_extis);
+
+
+        }
+        System.out.println("Wants to switch the account ? YES : Press 1 NO : Press any Buttong except 1\n");
+        if(scan.nextInt()!=1) {
+          changeAccount=true;
+        }
+        else {
+        	System.out.println("Plese enter the Number : \n1 : Saving Account \n2 : Checking Account");
+        	do {
+           enteredNumber=scan.nextInt();
+
+           if(!(enteredNumber==1||enteredNumber==2))
+           System.out.println("Plese enter the Corect Number : \n 1 : Saving Account \n2 : Checking Account");
+
+		}while(!(enteredNumber==1||enteredNumber==2));
+        }
+
+    }
+        while(!changeAccount);
+
+		
+	}
+	
+}
